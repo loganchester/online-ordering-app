@@ -1,0 +1,46 @@
+<!-- Header -->
+<div class="side-header fries-header">
+    
+    <!-- Title -->
+    <div class="side-title fries-title">
+        <h3>Fries</h3>
+    </div><!-- Title -->
+
+    <!-- Choose Button -->
+    <div class="side-chosen-button fries-chosen-button">
+        <button (click)="sendToParent()">Choose this side</button>
+    </div><!-- /Choose Button -->
+
+</div><!-- /Header -->
+
+
+<!-- Body -->
+<div class="side-body fries-body">
+
+    <!-- Options Name -->
+    <div class="side-options-name fries-options-name">
+        <h4>{{optionsName}}</h4>
+    </div><!-- /Option Name -->
+
+    <!-- Option List -->
+    <div class="side-options-list fries-options-list">
+        <select class="side-options fries-options" 
+                [(ngModel)]="optionSelected">
+            <option *ngFor="let option of options"
+                    [ngValue]="option">
+                    {{option}}
+            </option>
+        </select>
+    </div><!-- Options List -->
+
+</div><!-- /Body -->
+
+<!-- Errors -->
+<div class="side-error-container">
+
+    <!-- Options Error -->
+    <div *ngIf="noOptionSelected" class="side-options-error fries-options-error">
+        <p>You must select the size of fries you would like</p>
+    </div>
+
+</div><!-- /Errors -->

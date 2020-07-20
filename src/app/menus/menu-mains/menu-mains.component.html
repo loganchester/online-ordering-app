@@ -1,0 +1,43 @@
+<!-- Header -->
+<div class="menu-header mains-header">
+    <!-- Header title -->
+    <div class="header-title">
+        <h1>Mains</h1>
+    </div><!-- /Header title -->
+
+    <!-- Submit button -->
+    <div class="submit-button">
+        <button (click)="sendToParent()">Submit</button>
+        <p class="error-message" *ngIf="noMainsSelected">You must select a main item to submit an order</p>
+    </div><!-- !Submit button -->
+</div><!-- /Header -->
+
+<!-- Body -->
+<div class="menu-body mains-body">
+
+    <!-- Mains List -->
+    <div class="menu-list mains-list">
+        <ul>
+
+            <!-- Menu Item-->
+            <div class="menu-item burger-item">
+                <li>
+                    <app-main-item-burger (emitToParent)="receiveFromChild($event)">
+
+                    </app-main-item-burger>
+                </li>
+            </div><!-- /Menu Item -->
+
+            <!-- Menu Item-->
+            <div class="menu-item steak-item">
+                <li>
+                    <app-main-item-steak (emitToParent)="receiveFromChild($event)">
+
+                    </app-main-item-steak>
+                </li>
+            </div><!-- /Menu Item -->
+        </ul>
+    </div><!-- /Mains List -->
+
+
+</div><!-- /Body -->

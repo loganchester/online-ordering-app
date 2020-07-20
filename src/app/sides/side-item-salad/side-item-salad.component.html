@@ -1,0 +1,45 @@
+<!-- Header -->
+<div class="side-header salad-header">
+
+    <!-- Title -->
+    <div class="side-title salad-title">
+        <h3>Salad</h3>
+    </div><!-- /Title -->
+
+    <!-- Choose Button -->
+    <div class="side-chosen-button salad-chosen-button">
+        <button (click)="sendToParent()">Choose this side</button>
+    </div><!-- /Choose Button -->
+
+</div><!-- /Header -->
+
+<!-- Body -->
+<div class="side-body salad-body">
+
+    <!-- Options Name -->
+    <div class="side-options-name salad-options-name">
+        <h4>{{optionsName}}</h4>
+    </div><!-- /Option Name -->
+
+    <!-- Option List -->
+    <div class="side-options-list salad-options-list">
+        <select class="side-options salad-options" 
+                [(ngModel)]="optionSelected">
+            <option *ngFor="let option of options"
+                    [ngValue]="option">
+                    {{option}}
+            </option>
+        </select>
+    </div><!-- Options List -->
+
+</div><!-- /Body -->
+
+<!-- Errors -->
+<div class="side-error-container">
+
+    <!-- Options Error -->
+    <div *ngIf="noOptionSelected" class="side-options-error fries-options-error">
+        <p>You must select the dressing you would like</p>
+    </div>
+
+</div><!-- /Errors -->

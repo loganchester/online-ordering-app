@@ -1,0 +1,54 @@
+.side-header {
+    display: flex;
+    padding: 0px;
+}
+
+.side-title {
+    padding: 2px;
+    margin: auto;
+    float: right;
+    text-align: center;
+}
+
+.side-chosen-button {
+    width: 45%;
+    padding: 2px;
+    margin: auto;
+    float: left;
+}
+
+.side-chosen-button {
+    height: 50px;
+}
+
+.side-error-container p {
+    color: red;
+}
+
+.side-body {
+    display: flex;
+    padding: 0px;
+}
+
+.side-options-name {
+    width: 45%;
+    padding: 2px;
+    margin: auto;
+    float: right;
+    text-align: center;
+}
+
+.side-options-list {
+    width: 45%;
+    padding: 2px;
+    margin: auto;
+    float: left;
+}
+
+.side-options-list input {
+    width: 75px;
+}
+
+.side-options-list select {
+    width: 100px;
+}

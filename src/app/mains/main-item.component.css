@@ -1,0 +1,87 @@
+ul {
+    list-style-type: none;
+    padding: 0px;
+}
+
+.main-header {
+    display: flex;
+    border: black solid 2px;
+    border-radius: 15px;
+    padding: 2px;
+    text-align: center;
+    background-color: #edebeb;
+}
+
+.main-title {
+    width: 100px;
+    float: right;
+    text-align: center;
+}
+
+.main-chosen-button {
+    width: 150px;
+    float: left;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.main-chosen-button button {
+    height: 50px;
+}
+
+.order-counter {
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    float: left;
+}
+
+.main-error-container p {
+    color: red;
+}
+
+.main-body {
+    padding: 2px;
+}
+
+.main-options-requests-container {
+    display: flex;
+    padding: 2px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border: black solid 2px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    background-color: #edebeb;
+}
+
+.main-options-container {
+    width: 200px;
+}
+
+.main-sides-container {
+    border: black solid 2px;
+    border-radius: 15px;
+    padding-left: 10px;
+    background-color: #edebeb;
+}
+
+.main-sides-item {
+    padding: 2px;
+    width: 220px;
+    float: left;
+    border: black solid 2px;
+    border-radius: 15px;
+    margin: 5px;
+}
+
+.main-sides-list {
+    display: flex;
+    text-align: center;
+}
+
+.special-requests-container input {
+    height: 75px;
+    width: 230px;
+}

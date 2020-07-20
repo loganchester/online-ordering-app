@@ -1,0 +1,61 @@
+.menu-header {
+    margin-left: 40px;
+    padding-left: 10px;
+    padding-top: 15px;
+}
+
+.header-title {
+    width: 100px;
+    text-align: center;
+}
+
+.submit-button {
+    float: left;
+    display: flex;
+    height: 50px;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.submit-button button {
+    width: 100px;
+}
+
+.submit-button p {
+    margin-left: 10px;
+    width: 200px;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: red;
+}
+
+.menu-body {
+    margin: auto;
+}
+
+.menu-list {
+    display: flex;
+    width: 100%;
+}
+
+.menu-item {
+    width: 500px;
+    float: left;
+    padding: 5px;
+    border: black solid 2px;
+    border-radius: 15px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+
+.submit-button {
+    margin: auto;
+}
+
+ul {
+    list-style-type: none;
+}

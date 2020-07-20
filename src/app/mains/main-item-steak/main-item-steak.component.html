@@ -1,0 +1,115 @@
+<!-- Header -->
+<div class="main-header steak-header">
+    
+    <!-- Title -->
+    <div class="main-title burger-title">
+        <h1>Steak</h1>
+    </div><!-- /Title -->
+
+    <!-- Choose Button -->
+    <div class="main-chosen-button steak-chosen-button">
+        <button (click)="sendToParent()">Choose this main</button>
+    </div><!-- /Choose Button -->
+
+    <!-- In order counter -->
+    <div class="order-counter">
+        <h4>Steaks in your order: {{inOrder}}</h4>
+    </div>
+
+</div><!-- /Header -->
+
+<!-- Errors -->
+<div class="main-error-container">
+
+    <!-- Sides Error -->
+    <div *ngIf="noSideSelected" class="main-sides-error steak-sides-error">
+        <p>You must select side for your steak</p>
+    </div><!-- /Sides Error -->
+
+    <!-- Options Error -->
+    <div *ngIf="noOptionSelected" class="main-options-error steak-options-error">
+        <p>You must select an option for your steak</p>
+    </div>
+
+</div><!-- /Errors -->
+
+<!-- Body -->
+<div class="main-body steak-body">
+
+    <!-- Image and desc container -->
+    <div class="main-img-desc-container">
+        <!-- Image -->
+        <div class="main-image steak-image">
+            <img src="{{image}}">
+        </div><!-- /Image -->
+
+        <!-- Description -->
+        <div class="main-desc steak-desc">
+            <p>{{desc}}</p>
+        </div><!-- /Description -->
+    </div><!-- /Image and desc container -->
+
+    <!-- Options and requests container -->
+    <div class="main-options-requests-container">
+
+        <!-- Options conatianer -->
+        <div class="main-options-container">
+           
+            <!-- Options Name -->
+            <div class="main-options-name steak-options-name">
+                <h2>{{optionsName}}</h2>
+            </div><!-- /Option Name -->
+
+            <!-- Option List -->
+            <div class="main-options-list steak-options-list">
+                <select [(ngModel)]="optionsSelected"
+                        (change)="optionsChanged()">
+                    <option *ngFor="let option of options"
+                            [ngValue]=option>
+                            {{option.name}}
+                    </option>
+                </select>
+            </div><!-- Options List -->
+
+        </div><!-- /Options conatianer -->
+
+        <!-- Special Requests -->
+        <div class="special-requests-container">
+            <h2>Special Requests</h2>
+            <input type="text" [(ngModel)]="specialRequests">
+        </div><!-- /Special Requests -->
+
+    
+    </div><!-- /Options and requests container -->
+
+
+    <!-- Sides container -->
+    <div class="main-sides-container">
+
+        <!-- Sides Name -->
+        <div class="main-sides-name steak-sides-name">
+            <h2>{{sidesName}}</h2>
+        </div><!-- /Sides Name -->
+
+        <!-- Sides List -->
+        <div class="main-sides-list steak-sides-list">
+            <ul>
+                <!-- Side item -->
+                <div class="main-sides-item">
+                    <li >
+                        <app-side-item-salad (emitToParent)="receiveFromChild($event)"></app-side-item-salad>
+                    </li>
+                </div><!-- /Side item -->
+
+                <!-- Side item -->
+                <div class="main-sides-item">
+                    <li>
+                        <app-side-item-baked-potato (emitToParent)="receiveFromChild($event)"></app-side-item-baked-potato>
+                    </li>
+                </div><!-- /Side item -->
+            </ul>
+        </div><!-- /Sides List -->
+    
+    </div><!-- /Sides container -->
+
+</div><!-- /Body -->

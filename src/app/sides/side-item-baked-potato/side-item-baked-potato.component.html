@@ -1,0 +1,41 @@
+<!-- Header -->
+<div class="side-header baked-potato-header">
+    
+    <!-- Title -->
+    <div class="side-title baked-potato-title">
+        <h3>Baked Potato</h3>
+    </div><!-- Title -->
+
+    <!-- Choose Button -->
+    <div class="side-chosen-button baked-potato-chosen-button">
+        <button (click)="sendToParent()">Choose this side</button>
+    </div><!-- /Choose Button -->
+
+</div><!-- /Header -->
+
+<!-- Body -->
+<div class="side-body baked-potato-body">
+
+    <!-- Options Name -->
+    <div class="side-options-name baked-potato-options-name">
+        <h4>{{optionsName}}</h4>
+    </div><!-- /Option Name -->
+
+
+    <!-- Option List -->
+    <div class="side-options-list baked-potato-options-list">
+        <input type="text" class="side-options baked-potato-options" 
+                [(ngModel)]="optionSelected">
+    </div><!-- Options List -->
+
+</div><!-- /Body -->
+
+<!-- Errors -->
+<div class="side-error-container">
+
+    <!-- Options Error -->
+    <div *ngIf="noOptionSelected" class="side-options-error baked-potato-options-error">
+        <p>You must select the number of baked potatoes you would like</p>
+    </div>
+
+</div><!-- /Errors -->

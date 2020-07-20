@@ -1,0 +1,23 @@
+.order-header {
+    margin-left: 40px;
+    padding-left: 10px;
+    padding-top: 15px;
+}
+
+.order-header button {
+    margin-left: 40px;
+    padding-left: 10px;
+    padding-top: 15px;
+}
+
+.order-body {
+    margin-left: 40px;
+    padding-left: 10px;
+    padding-top: 15px;
+}
+
+.order-body pre {
+    margin-left: 40px;
+    padding-left: 10px;
+    padding-top: 15px;
+}
