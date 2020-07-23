@@ -5,22 +5,23 @@
     <div class="menus-container">
 
         <!-- Main Menu -->
-        <div class="menu main-menu">
-            <app-menu-mains *ngIf="orderHidden" 
-                            (emitToParent)="receiveFromChild($event)">
+        <div class="menu main-menu" *ngIf="!mainHidden">
+            <app-menu-mains (emitToParent)="receiveFromChild($event)">
             </app-menu-mains>
         </div><!-- /Main Menu -->
     
     </div><!-- /Menus Container -->
 
     <!-- Order Container -->
-    <div class="order-container">
+    <div class="order-container" *ngIf="mainHidden">
 
-        <app-order  *ngIf="!orderHidden" [order]="order"></app-order>
+        <!-- User's order -->
+        <app-order [order]="order"></app-order><!-- /User's order -->
 
-        <div *ngIf="!orderHidden" class="order-button">
+        <!-- New order button -->
+        <div class="order-button">
             <button (click)="newOrder()">Start new order</button>
-        </div>
+        </div><!-- /New order button -->
     </div><!-- /Order Container -->
 
 </div><!-- /App -->

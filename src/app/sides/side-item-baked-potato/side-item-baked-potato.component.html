@@ -1,41 +1,50 @@
-<!-- Header -->
-<div class="side-header baked-potato-header">
-    
-    <!-- Title -->
-    <div class="side-title baked-potato-title">
-        <h3>Baked Potato</h3>
-    </div><!-- Title -->
+<!-- Side container -->
+<div class="side-container">
 
-    <!-- Choose Button -->
-    <div class="side-chosen-button baked-potato-chosen-button">
-        <button (click)="sendToParent()">Choose this side</button>
-    </div><!-- /Choose Button -->
+    <!-- Header -->
+    <div class="side-header baked-potato-header" (click)="reveal()">
 
-</div><!-- /Header -->
+        <!-- Title -->
+        <div class="side-title baked-potato-title">
+            <h3>{{name}}</h3>
+        </div><!-- /Title -->
 
-<!-- Body -->
-<div class="side-body baked-potato-body">
+        <!-- Desc -->
+        <div class="side-desc baked-potato-desc">
+            <p>{{desc}}</p>
+        </div>
 
-    <!-- Options Name -->
-    <div class="side-options-name baked-potato-options-name">
-        <h4>{{optionsName}}</h4>
-    </div><!-- /Option Name -->
+    </div><!-- /Header -->
 
+    <!-- Body -->
+    <div *ngIf="bakedPotatoReveal" class="side-body baked-potato-body">
 
-    <!-- Option List -->
-    <div class="side-options-list baked-potato-options-list">
-        <input type="text" class="side-options baked-potato-options" 
-                [(ngModel)]="optionSelected">
-    </div><!-- Options List -->
+        <!-- Options form -->
+        <form #f="ngForm">
 
-</div><!-- /Body -->
+            <!-- Options list -->
+            <div class="side-options-list">
+                <label for="baked-potato-options">How many baked potatoes would you like?</label>
+                <input  type="text" 
+                        required
+                        name="bakedPotatoOptions"
+                        #bakedPotatoOptions="ngModel"
+                        id="bakedPotatoOptions"
+                        [(ngModel)]="optionSelected">
+            </div><!-- /Options list -->
 
-<!-- Errors -->
-<div class="side-error-container">
+            <!-- Options list error -->
+            <div *ngIf="bakedPotatoOptions.touched && bakedPotatoOptions.invalid" class="side-error-container">
+                <div class="error-text" *ngIf="bakedPotatoOptions.errors.required">A number is required.</div>
+            </div><!-- /Options list error -->
 
-    <!-- Options Error -->
-    <div *ngIf="noOptionSelected" class="side-options-error baked-potato-options-error">
-        <p>You must select the number of baked potatoes you would like</p>
-    </div>
+        </form><!-- /Options form -->
 
-</div><!-- /Errors -->
+        <!-- Choose Button -->
+        <div class="side-chosen-button baked-potato-chosen-button">
+            <button (click)="sendToParent()" [disabled]="!f.valid">Choose this side</button>
+        </div><!-- /Choose Button -->
+
+    </div><!-- /Body -->
+
+</div><!-- /Side container -->

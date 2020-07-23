@@ -9,47 +9,43 @@ export class MainItemSteakComponent implements OnInit {
 
   name = "Steak";
 
-  desc = "";
+  desc = "This is a description for steak";
 
   image = ""; // ../../../assets/images/Steak.jpeg
 
   optionsName = "Doneness";
 
+  sidesComplete: boolean = false;
+
+  optionsComplete: boolean = false;
+
   options = [
     {
+      id: 1,
       name: "Rare"    
     },
     {
+      id: 2,
       name: "Medium"    
     },
     {
+      id: 3,
       name: "Well Done"
     }
   ];
 
-  // used to send selected option to formatted
-  optionsFormatted = {
-    name: this.optionsName,
-    options: []
-  }
+  // used to hold selected options
+  optionsSelected;
 
-  // used to hold selected option
-  optionsSelected = {
-    name: ""
-  };
-
-  noOptionSelected: boolean = false;
+  // used to hold formatted selected options
+  optionsFormatted;
 
   sidesName = "Sides";
 
   // used to hold selected side
-  sideSelected = {
-    name: "",
-    options: [],
-    optionsName: ""
-  };
+  sideSelected;
 
-  noSideSelected: boolean = false;
+  steakReveal: boolean = false;
 
   @Output() emitToParent = new EventEmitter();
 
@@ -63,44 +59,98 @@ export class MainItemSteakComponent implements OnInit {
     specialRequests: this.specialRequests
   }
 
-  // used to track number of burgers in order
-  inOrder = 0;
+  orderButton: string = "Selections Required";
+
+  sidesRequiredTextStyle: string = "color: red";
+
+  sidesRequiredText: string = "*Required";
+
+  optionsRequiredTextStyle: string = "color: red";
+
+  optionsRequiredText: string = "*Required";
+  
 
   // used to update user options upon input
   optionsChanged() {
-    this.optionsFormatted.options[0] = this.optionsSelected.name
+    this.optionsComplete = true;
+    this.optionsRequiredText = "Selected";
+    this.optionsRequiredTextStyle = "";
+    this.orderButtonToggle();
   }
   
+  // side selection obtained from side component
   receiveFromChild(event) {
-    this.sideSelected = event
+    this.sideSelected = event;
+    this.sidesComplete = true;
+    this.sidesRequiredText = this.sideSelected.name + " Selected";
+    this.sidesRequiredTextStyle = "";
+    this.orderButtonToggle();
   }
 
-  sendToParent() {
-    if ((this.optionsFormatted.options.length > 0) && (this.sideSelected.options.length > 0)) {
-      // options and side have been selected correctly
-      this.inOrder += 1;
-      this.noSideSelected = false;
-      this.noOptionSelected = false;
-      this.formatted.options = this.optionsFormatted;
-      this.formatted.side = this.sideSelected;
-      this.formatted.specialRequests = this.specialRequests;
-      this.emitToParent.emit(this.formatted);                 // send entire main to parent
-    }
-    else {
-      if (this.optionsFormatted.options.length == 0) {
-        this.noOptionSelected = true;
-      }
-      else {
-        this.noOptionSelected = false;
-      }
-      if (this.sideSelected.options.length == 0) {
-        this.noSideSelected = true;
-      }
-      else {
-        this.noSideSelected = false;
-      }
+  // to change the order button string
+  orderButtonToggle() {
+    if (this.optionsComplete && this.sidesComplete ) {
+      this.orderButton = "Add to order";
     }
   }
+
+  // reveals the options for the side and a button to select the side
+  reveal() {
+    this.steakReveal= !this.steakReveal;
+  }
+
+  // for testing
+  log(x) {
+    console.log(x);
+  }
+
+  // used to format everything relating to a burger
+  formatAll() {
+    this.formatted.options = this.optionsSelected;
+    this.formatted.side = this.sideSelected;
+    this.formatted.specialRequests = this.specialRequests;
+  }
+
+  // used to send entire burger item to parent
+  sendToParent() {
+    this.formatAll(); 
+    this.log(this.formatted);
+    this.emitToParent.emit(this.formatted)
+    this.reset();
+    this.reveal();
+  }
+
+    // reset the component
+    reset() {
+      this.formatted = {
+        name: this.name,
+        options: this.optionsFormatted,
+        side: this.sideSelected,
+        specialRequests: this.specialRequests
+      }
+      this.optionsSelected = undefined;
+      this.optionsComplete = false;
+      this.optionsRequiredTextStyle = "color: red";
+      this.optionsRequiredText = "*Required";
+      this.sideSelected = undefined;
+      this.sidesComplete = false;
+      this.sidesRequiredTextStyle = "color: red";
+      this.sidesRequiredText = "*Required";
+      this.options = [
+        {
+          id: 1,
+          name: "Rare"    
+        },
+        {
+          id: 2,
+          name: "Medium"    
+        },
+        {
+          id: 3,
+          name: "Well Done"
+        }
+      ];
+    }
 
   constructor() { }
 

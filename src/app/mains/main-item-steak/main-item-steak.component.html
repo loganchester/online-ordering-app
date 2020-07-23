@@ -1,98 +1,91 @@
 <!-- Header -->
-<div class="main-header steak-header">
+<div class="main-header" (click)="reveal()">
     
     <!-- Title -->
-    <div class="main-title burger-title">
+    <div class="main-title">
         <h1>Steak</h1>
     </div><!-- /Title -->
 
-    <!-- Choose Button -->
-    <div class="main-chosen-button steak-chosen-button">
-        <button (click)="sendToParent()">Choose this main</button>
-    </div><!-- /Choose Button -->
-
-    <!-- In order counter -->
-    <div class="order-counter">
-        <h4>Steaks in your order: {{inOrder}}</h4>
-    </div>
+    <!-- Desc -->
+    <div class="side-desc">
+        <p>{{desc}}</p>
+    </div><!-- /Desc -->
 
 </div><!-- /Header -->
 
-<!-- Errors -->
-<div class="main-error-container">
-
-    <!-- Sides Error -->
-    <div *ngIf="noSideSelected" class="main-sides-error steak-sides-error">
-        <p>You must select side for your steak</p>
-    </div><!-- /Sides Error -->
-
-    <!-- Options Error -->
-    <div *ngIf="noOptionSelected" class="main-options-error steak-options-error">
-        <p>You must select an option for your steak</p>
-    </div>
-
-</div><!-- /Errors -->
-
 <!-- Body -->
-<div class="main-body steak-body">
+<div *ngIf="steakReveal" class="main-body">
 
-    <!-- Image and desc container -->
-    <div class="main-img-desc-container">
-        <!-- Image -->
-        <div class="main-image steak-image">
-            <img src="{{image}}">
-        </div><!-- /Image -->
+    <!-- Options conatianer -->
+    <div class="main-options-container">
 
-        <!-- Description -->
-        <div class="main-desc steak-desc">
-            <p>{{desc}}</p>
-        </div><!-- /Description -->
-    </div><!-- /Image and desc container -->
+        <!-- Options header -->
+        <div class="main-options-header">
 
-    <!-- Options and requests container -->
-    <div class="main-options-requests-container">
+            <!-- Title text -->
+            <div class="title-box">
+                <h2 class="left-text">{{optionsName}}</h2> 
+            </div><!-- /Title text -->
 
-        <!-- Options conatianer -->
-        <div class="main-options-container">
-           
-            <!-- Options Name -->
-            <div class="main-options-name steak-options-name">
-                <h2>{{optionsName}}</h2>
-            </div><!-- /Option Name -->
+            <!-- Required text -->
+            <div class="required-box">
+                <p class="left-text">Pick One</p>
+                <p class="right-text" [style]="optionsRequiredTextStyle">{{optionsRequiredText}}</p>
+            </div><!-- /Required text -->
 
-            <!-- Option List -->
-            <div class="main-options-list steak-options-list">
+        </div><!-- /Options header -->
+
+         <!-- Options form-->
+         <form #f="ngForm">
+            
+            <!-- Options List -->
+            <div class="main-options-list">
+
+                <!-- Options item -->
+                <label for="steakOptions"></label>
                 <select [(ngModel)]="optionsSelected"
+                        required
+                        name="steakOptions"
+                        #steakOptions="ngModel"
+                        id="steakOptions"
                         (change)="optionsChanged()">
+                    <option value="" selected>Choose doneness</option>
                     <option *ngFor="let option of options"
-                            [ngValue]=option>
-                            {{option.name}}
-                    </option>
-                </select>
-            </div><!-- Options List -->
+                            [ngValue]="option">{{option.name}}</option>
+                </select><!-- /Options item -->
 
-        </div><!-- /Options conatianer -->
+            </div><!-- /Options List -->
 
-        <!-- Special Requests -->
-        <div class="special-requests-container">
-            <h2>Special Requests</h2>
-            <input type="text" [(ngModel)]="specialRequests">
-        </div><!-- /Special Requests -->
+            <!-- Options errors -->
+            <div *ngIf="steakOptions.touched && steakOptions.invalid" class="main-error-container">
+                <p *ngIf="steakOptions.errors.required" style="color: red">A doneness is required</p>
+            </div><!-- /Options errors -->
 
-    
-    </div><!-- /Options and requests container -->
+        </form><!-- /Options form-->
 
+    </div><!-- /Options conatianer -->
 
     <!-- Sides container -->
     <div class="main-sides-container">
 
-        <!-- Sides Name -->
-        <div class="main-sides-name steak-sides-name">
-            <h2>{{sidesName}}</h2>
-        </div><!-- /Sides Name -->
+        <!-- Sides header -->
+        <div class="main-sides-header">
+
+            <!-- Title text -->
+            <div class="title-box">
+                <h2 class="left-text">{{sidesName}}</h2>
+            </div><!-- /Title text -->
+
+            <!-- Required text -->
+            <div class="required-box">
+                <p class="left-text">Pick One</p>
+                <p class="right-text" [style]="sidesRequiredTextStyle">{{sidesRequiredText}}</p>
+            </div><!-- /Required text -->
+
+        </div><!-- /Sides header -->
 
         <!-- Sides List -->
-        <div class="main-sides-list steak-sides-list">
+        <div class="main-sides-list">
             <ul>
                 <!-- Side item -->
                 <div class="main-sides-item">
@@ -109,7 +102,19 @@
                 </div><!-- /Side item -->
             </ul>
         </div><!-- /Sides List -->
-    
+
     </div><!-- /Sides container -->
+
+    <!-- Special Requests -->
+    <div class="special-requests-container">
+        <h2>Special Requests</h2>
+        <input type="text" [(ngModel)]="specialRequests">
+    </div><!-- /Special Requests -->
+
+    <!-- Choose Button -->
+    <div class="main-chosen-button">
+        <button (click)="sendToParent()" [disabled]="!sidesComplete || !optionsComplete">{{orderButton}}</button>
+    </div><!-- /Choose Button -->
+
 
 </div><!-- /Body -->

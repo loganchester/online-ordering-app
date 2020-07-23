@@ -4,84 +4,94 @@ ul {
 }
 
 .main-header {
-    display: flex;
-    border: black solid 2px;
-    border-radius: 15px;
     padding: 2px;
-    text-align: center;
-    background-color: #edebeb;
-}
-
-.main-title {
-    width: 100px;
-    float: right;
-    text-align: center;
-}
-
-.main-chosen-button {
-    width: 150px;
-    float: left;
-    text-align: center;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.main-chosen-button button {
-    height: 50px;
-}
-
-.order-counter {
-    text-align: center;
-    margin-top: auto;
-    margin-bottom: auto;
-    float: left;
-}
-
-.main-error-container p {
-    color: red;
 }
 
 .main-body {
     padding: 2px;
 }
 
-.main-options-requests-container {
+.title-box {
     display: flex;
-    padding: 2px;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    border: black solid 2px;
-    border-radius: 15px;
-    margin-bottom: 10px;
-    background-color: #edebeb;
+    margin-top: auto;  
+    margin-bottom: auto;  
+}
+
+.required-box {
+    display: flex;
+}
+
+.required-box .right-text {
+    width: 280px;
+}
+.left-text {
+    float: left;
+    width: 280px;
+}
+
+.title-box .right-text {
+    width: 280px;
+}
+
+.right-text {
+    float: right;
+    text-align: right;
 }
 
 .main-options-container {
-    width: 200px;
+    width: 395px;
+    margin-bottom: 30px;
+}
+
+.main-options-list select {
+    width: 395px;
+}
+
+.main-options-item {
+    display: flex;
+    border: solid grey 1px;
+    padding: 2px;
+    margin-bottom: 2px;
+    background-color: white;
+}
+
+.main-options-item label {
+    float: left;
+    width: 380px;
+}
+
+.main-options-item input {
+    float: right;
 }
 
 .main-sides-container {
-    border: black solid 2px;
-    border-radius: 15px;
-    padding-left: 10px;
-    background-color: #edebeb;
+    width: 395px;
+    margin-bottom: 30px;
 }
 
 .main-sides-item {
     padding: 2px;
-    width: 220px;
-    float: left;
-    border: black solid 2px;
-    border-radius: 15px;
-    margin: 5px;
+    border: grey solid 1px;
+    margin-bottom: 2px;
+    background-color: white;
 }
 
-.main-sides-list {
-    display: flex;
-    text-align: center;
+.main-sides-item:hover {
+    border: black solid 2px;
 }
 
 .special-requests-container input {
-    height: 75px;
-    width: 230px;
+    height: 50px;
+    width: 390px;
+}
+
+.main-chosen-button {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.main-chosen-button button {
+    height: 50px;
+    width: 395px;
 }

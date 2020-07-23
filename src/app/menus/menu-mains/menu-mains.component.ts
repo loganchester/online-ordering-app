@@ -8,49 +8,60 @@ import { newArray } from "@angular/compiler/src/util";
 })
 export class MenuMainsComponent implements OnInit {
 
-  orderFormatted: string = "";
+  orderString: string = "";
+
+  orderFormatted = new Array();
 
   @Output() emitToParent = new EventEmitter();
 
-  noMainsSelected: boolean = false;
+  mainCompleted: boolean = false;
 
+  // a main has been added to the order
   receiveFromChild(event) {
-    this.formatOrder(event)
+    this.mainCompleted = true;
+    this.formatOrder(event);
+    this.orderFormatted.push(this.orderString);
+    this.orderString = "";
   }
 
-  sendToParent() {
-    if (this.orderFormatted.length > 0) {
-      this.noMainsSelected = false;
-      this.emitToParent.emit(this.orderFormatted);
-    }
-    else {
-      this.noMainsSelected = true;
-    }
+  // send complete order to app
+  submit() {
+    this.emitToParent.emit(this.orderFormatted);
+    this.orderFormatted = new Array();
+  }
+
+  // for testing
+  log(x) {
+    console.log(x);
   }
 
   formatOrder(event) {
     // main name
-    this.orderFormatted += event.name + "\n" + "\t";
+    this.orderString += event.name + "\n" + "\t";
+    
     // main options
-    this.orderFormatted += event.options.name + ":";
-    for (let option of event.options.options) {
-      this.orderFormatted += "\n" + "\t\t"
-      this.orderFormatted += option;
+    this.orderString += "Option(s): "
+    if (event.options instanceof Array) {
+      // there is more than one option selected
+      for (let option of event.options) {
+        this.orderString += option.name + "\t";
+      }
     }
+    else {
+      // there is only one option
+      this.orderString += event.options.name;
+    }
+    this.orderString += "\n" + "\n" + "\t";
+
     // main side
-    this.orderFormatted += "\n" + "\t";
-    this.orderFormatted += event.side.name + "\n" + "\t\t";
-    // side options
-    this.orderFormatted += event.side.optionsName + ": ";
-    for (let option of event.side.options) {
-      this.orderFormatted += option + " ";
-    }
+    this.orderString += "Side: " + event.side.option + " " + event.side.name + "\n" + "\t";
+
     // special requests
     if (event.specialRequests != undefined) {    
-      this.orderFormatted += "\n" + "\t";
-      this.orderFormatted += "Special Requests: " + event.specialRequests;
+      this.orderString += "\n" + "\t";
+      this.orderString += "Special Requests: " + event.specialRequests;
     }
-    this.orderFormatted += "\n" + "\n";
+    this.orderString += "\n" + "\n";
   }
 
   constructor() { }

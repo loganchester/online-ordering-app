@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +10,15 @@ export class AppComponent {
 
   order;
 
-  orderHidden: boolean = true;
+  mainHidden: boolean = false;
 
   receiveFromChild(event) {
+    this.mainHidden = true;
     this.order = event;
-    this.orderHidden = false;
-    console.log("Order: ", this.order)
   }
 
   newOrder() {
-    this.orderHidden = true;
+    this.mainHidden = false;
   }
 
 }

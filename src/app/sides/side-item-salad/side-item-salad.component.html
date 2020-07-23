@@ -1,45 +1,53 @@
-<!-- Header -->
-<div class="side-header salad-header">
+<!-- Side container -->
+<div class="side-container">
 
-    <!-- Title -->
-    <div class="side-title salad-title">
-        <h3>Salad</h3>
-    </div><!-- /Title -->
+    <!-- Header -->
+    <div class="side-header salad-header" (click)="reveal()">
 
-    <!-- Choose Button -->
-    <div class="side-chosen-button salad-chosen-button">
-        <button (click)="sendToParent()">Choose this side</button>
-    </div><!-- /Choose Button -->
+        <!-- Title -->
+        <div class="side-title salad-title">
+            <h3>{{name}}</h3>
+        </div><!-- /Title -->
 
-</div><!-- /Header -->
+        <!-- Desc -->
+        <div class="side-desc salad-desc">
+            <p>{{desc}}</p>
+        </div>
 
-<!-- Body -->
-<div class="side-body salad-body">
+    </div><!-- /Header -->
 
-    <!-- Options Name -->
-    <div class="side-options-name salad-options-name">
-        <h4>{{optionsName}}</h4>
-    </div><!-- /Option Name -->
+    <!-- Body -->
+    <div *ngIf="saladReveal" class="side-body salad-body">
 
-    <!-- Option List -->
-    <div class="side-options-list salad-options-list">
-        <select class="side-options salad-options" 
-                [(ngModel)]="optionSelected">
-            <option *ngFor="let option of options"
-                    [ngValue]="option">
-                    {{option}}
-            </option>
-        </select>
-    </div><!-- Options List -->
+        <!-- Options form -->
+        <form #f="ngForm">
 
-</div><!-- /Body -->
+            <!-- Option list -->
+            <div class="side-options-list">
+                <label for="salad-options">Which dressing would you like for you salad?</label>
+                <select [(ngModel)]="optionSelected"
+                        required
+                        name="saladOptions" 
+                        #saladOptions="ngModel"
+                        id="saladOptions">
+                    <option value="" selected>Choose dressing</option>
+                    <option *ngFor="let option of options"
+                            [ngValue]="option">{{option.name}}</option>
+                </select>
+            </div><!-- /Option list -->
 
-<!-- Errors -->
-<div class="side-error-container">
+            <!-- Option list error -->
+            <div *ngIf="saladOptions.touched && saladOptions.invalid" class="side-error-container">
+                <div class="error-text" *ngIf="saladOptions.errors.required">A dressing is required</div>
+            </div><!-- /Option list error -->
+            
+        </form><!-- /Options form -->
 
-    <!-- Options Error -->
-    <div *ngIf="noOptionSelected" class="side-options-error fries-options-error">
-        <p>You must select the dressing you would like</p>
-    </div>
+        <!-- Choose Button -->
+        <div class="side-chosen-button salad-chosen-button">
+            <button (click)="sendToParent()" [disabled]="!f.valid">Choose this side</button>
+        </div><!-- /Choose Button -->
 
-</div><!-- /Errors -->
+    </div><!-- /Body -->
+
+</div><!-- /Side container -->

@@ -9,36 +9,43 @@ export class SideItemBakedPotatoComponent implements OnInit {
 
   name = "Baked Potato";
 
-  desc = "";
+  desc = "This is a baked potato description.";
 
   image = "";
 
-  options;
+  bakedPotatoSelected: boolean = true;
 
-  optionsName = "How many";
+  bakedPotatoReveal: boolean = false;
 
   optionSelected;
 
-  noOptionSelected: boolean = false;
-
-  formatted = {
+  optionSelectedFormatted = {
     name: this.name,
-    options: [],
-    optionsName: this.optionsName
-  };
+    option: this.optionSelected
+  }
 
   @Output() emitToParent = new EventEmitter();
 
+  // format the option selected by the user
+  formatSelected() {
+    this.optionSelectedFormatted.option = this.optionSelected
+  }
+
+  // send the selected to the parent
   sendToParent() {
-    if ((this.optionSelected != undefined) && (this.optionSelected != "")) {
-      // baked potato has been selected correctly
-      this.noOptionSelected = false;
-      this.formatted.options[0] = this.optionSelected;  // give user input to formatted
-      this.emitToParent.emit(this.formatted);           // send the selected to the parent 
-    }
-    else {
-      this.noOptionSelected = true;
-    }
+    this.reveal();
+    this.formatSelected();
+    this.emitToParent.emit(this.optionSelectedFormatted);
+  }
+
+  // reveals the options for the side and a button to select the side
+  reveal() {
+    this.bakedPotatoReveal= !this.bakedPotatoReveal;
+  }
+  
+  // for testing
+  log(x) {      
+    console.log(x)
   }
 
   constructor() { }

@@ -1,91 +1,81 @@
 <!-- Header -->
-<div class="main-header burger-header">
+<div class="main-header" (click)="reveal()">
     
     <!-- Title -->
-    <div class="main-title burger-title">
+    <div class="main-title">
         <h1>Burger</h1>
     </div><!-- /Title -->
 
-    <!-- Choose Button -->
-    <div class="main-chosen-button burger-chosen-button">
-        <button (click)="sendToParent()">Choose this main</button>
-    </div><!-- /Choose Button -->
-
-    <!-- In order counter -->
-    <div class="order-counter">
-        <h4>Burgers in your order: {{inOrder}}</h4>
-    </div>
+    <!-- Desc -->
+    <div class="side-desc">
+        <p>{{desc}}</p>
+    </div><!-- /Desc -->
 
 </div><!-- /Header -->
 
-<!-- Errors -->
-<div class="main-error-container">
-
-    <!-- Sides Error -->
-    <div *ngIf="noSideSelected" class="main-sides-error burger-sides-error">
-        <p>You must select side for your burger</p>
-    </div><!-- /Sides Error -->
-
-</div><!-- /Errors -->
-
 <!-- Body -->
-<div class="main-body burger-body">
+<div *ngIf="burgerReveal" class="main-body">
 
-    <!-- Image and desc container -->
-    <div class="main-img-desc-container">
-        <!-- Image -->
-        <div class="main-image burger-image">
-            <img src="{{image}}">
-        </div><!-- /Image -->
+    <!-- Options conatianer -->
+    <div class="main-options-container">
 
-        <!-- Description -->
-        <div class="main-desc burger-desc">
-            <p>{{desc}}</p>
-        </div><!-- /Description -->
-    </div><!-- /Image and desc container -->
+        <!-- Options header -->
+        <div class="main-options-header">
 
-    <!-- Options and requests container -->
-    <div class="main-options-requests-container">
+            <!-- Title text-->
+            <div class="title-box">
+                <h2 class="left-text">{{optionsName}}</h2> 
+            </div><!-- /Title text-->
 
-        <!-- Options conatianer -->
-        <div class="main-options-container">
-            <!-- Options Name -->
-            <div class="main-options-name burger-options-name">
-                <h2>{{optionsName}}</h2>
-            </div><!-- /Option Name -->
+            <!-- Required text -->
+            <div class="required-box">
+                <p class="left-text">Pick Any</p>
+            </div><!-- /Required text -->
+            
+        </div><!-- /Options header -->
 
-            <!-- Option List -->
-            <div class="main-options-list burger-options-list">
-                <ul>
-                    <li *ngFor="let option of options">
-                        <input  type="checkbox"
-                                [(ngModel)]="option.isSelected" 
-                                (change)="optionsChanged()">
-                        {{option.name}}
-                    </li>
-                </ul>
+         <!-- Options form-->
+         <form #f="ngForm">
+            
+            <!-- Options List -->
+            <div class="main-options-list">
+                
+                <!-- Options item-->
+                <div class="main-options-item" *ngFor="let option of options">
+                    <label>{{option.name}}</label>
+                    <input  type="checkbox"
+                            name="{{option.name}}"
+                            [(ngModel)]="option.isSelected"> 
+                </div><!-- /Options item-->
+            
             </div><!-- Options List -->
-        </div><!-- /Options conatianer -->
 
-        <!-- Special Requests -->
-        <div class="special-requests-container">
-            <h2>Special Requests</h2>
-            <input type="text" [(ngModel)]="specialRequests">
-        </div>
-    
-    </div><!-- /Options and requests container -->
+        </form><!-- /Options form-->
+
+    </div><!-- /Options conatianer -->
 
     <!-- Sides container -->
     <div class="main-sides-container">
 
-        <!-- Sides Name -->
-        <div class="main-sides-name burger-sides-name">
-            <h2>{{sidesName}}</h2>
+        <!-- Sides header -->
+        <div class="main-sides-header">
+
+            <!-- Title text-->
+            <div class="title-box">
+                <h2 class="left-text">{{sidesName}}</h2>
+            </div><!-- /Title text-->
+
+            <!-- Required text -->
+            <div class="required-box">
+                <p class="left-text">Pick One</p>
+                <p class="right-text" [style]="sidesRequiredTextStyle">{{sidesRequiredText}}</p>
+            </div><!-- /Required text -->
+
         </div><!-- /Sides Name -->
 
 
         <!-- Sides List -->
-        <div class="main-sides-list burger-sides-list">
+        <div class="main-sides-list">
             <ul>
                 <!-- Side item -->
                 <div class="main-sides-item">
@@ -104,6 +94,17 @@
         </div><!-- /Sides List -->
 
     </div><!-- /Sides container -->
+
+    <!-- Special Requests -->
+    <div class="special-requests-container">
+        <h2>Special Requests</h2>
+        <input type="text" [(ngModel)]="specialRequests">
+    </div><!-- /Special Requests -->
+
+    <!-- Choose Button -->
+    <div class="main-chosen-button">
+        <button (click)="sendToParent()" [disabled]="!sidesComplete">{{orderButton}}</button>
+    </div><!-- /Choose Button -->
 
 
 </div><!-- /Body -->
