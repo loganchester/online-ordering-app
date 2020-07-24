@@ -30,8 +30,14 @@
                         name="bakedPotatoOptions"
                         #bakedPotatoOptions="ngModel"
                         id="bakedPotatoOptions"
-                        [(ngModel)]="optionSelected">
+                        [(ngModel)]="optionSelected"
+                        pattern="[0-9]">
             </div><!-- /Options list -->
+
+            <!-- Options list error -->
+            <div *ngIf="bakedPotatoOptions.invalid && bakedPotatoOptions.errors.pattern" class="side-error-container">
+                <div class="error-text" style="color: red">You must enter a single digit number.</div>
+            </div><!-- /Options list error -->
 
         </form><!-- /Options form -->
 

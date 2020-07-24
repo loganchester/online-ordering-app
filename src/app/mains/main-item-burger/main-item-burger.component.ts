@@ -84,15 +84,15 @@ export class MainItemBurgerComponent implements OnInit {
   receiveFromChild(event) {
     this.sideSelected = event;
     this.sidesComplete = true;
-      // change the border around the side that is currently selected
-      if (event.name == "Salad") {
-        this.saladStyle = "border: #ACCEF7 solid 2px";
-        this.friesStyle = "";
-      }
-      if (event.name == "Fries") {
-        this.friesStyle = "border: #ACCEF7 solid 2px";
-        this.saladStyle = "";
-      }
+    // change the border around the side that is currently selected
+    if (event.name == "Salad") {
+      this.saladStyle = "border: #ACCEF7 solid 2px";
+      this.friesStyle = "";
+    }
+    if (event.name == "Fries") {
+      this.friesStyle = "border: #ACCEF7 solid 2px";
+      this.saladStyle = "";
+    }
     this.sidesRequiredText = "";
     this.sidesRequiredTextStyle = "";
     this.orderButtonToggle();
