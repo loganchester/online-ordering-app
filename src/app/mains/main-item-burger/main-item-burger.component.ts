@@ -68,6 +68,10 @@ export class MainItemBurgerComponent implements OnInit {
   sidesRequiredTextStyle: string = "color: red";
 
   sidesRequiredText: string = "*Required";
+
+  saladStyle: string = "";
+
+  friesStyle: string = "";
   
   // used to format user selected options before sending to parent
   formatOptions() {
@@ -80,7 +84,16 @@ export class MainItemBurgerComponent implements OnInit {
   receiveFromChild(event) {
     this.sideSelected = event;
     this.sidesComplete = true;
-    this.sidesRequiredText = this.sideSelected.name + " Selected";
+      // change the border around the side that is currently selected
+      if (event.name == "Salad") {
+        this.saladStyle = "border: #ACCEF7 solid 2px";
+        this.friesStyle = "";
+      }
+      if (event.name == "Fries") {
+        this.friesStyle = "border: #ACCEF7 solid 2px";
+        this.saladStyle = "";
+      }
+    this.sidesRequiredText = "";
     this.sidesRequiredTextStyle = "";
     this.orderButtonToggle();
   }
@@ -89,6 +102,9 @@ export class MainItemBurgerComponent implements OnInit {
   orderButtonToggle() {
     if (this.sidesComplete ) {
       this.orderButton = "Add to order";
+    }
+    else {
+      this.orderButton = "Selections Required";
     }
   }
 
@@ -127,12 +143,10 @@ export class MainItemBurgerComponent implements OnInit {
       side: this.sideSelected,
       specialRequests: this.specialRequests
     }
+
+    // options reset
     this.optionsSelected = undefined;
     this.optionsComplete = false;
-    this.sideSelected = undefined;
-    this.sidesComplete = false;
-    this.sidesRequiredTextStyle = "color: red";
-    this.sidesRequiredText = "*Required";
     this.options = [
       {
         name: "Ketchup",
@@ -151,6 +165,20 @@ export class MainItemBurgerComponent implements OnInit {
         isSelected: false
       }
     ];
+
+    // sides reset
+    this.sideSelected = undefined;
+    this.sidesComplete = false;
+    this.sidesRequiredTextStyle = "color: red";
+    this.sidesRequiredText = "*Required";
+    this.saladStyle = "";
+    this.friesStyle = "";
+
+    // special requests reset
+    this.specialRequests = undefined;
+
+    // order button reset
+    this.orderButtonToggle();
   }
 
   constructor() { }

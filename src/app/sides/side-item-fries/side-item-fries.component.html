@@ -31,16 +31,10 @@
                         #friesOptions="ngModel"
                         id="friesOptions" 
                         class="form-control">
-                    <option value="" selected>Choose dressing</option>
                     <option *ngFor="let option of options"
                             [ngValue]="option">{{option.name}}</option>
                 </select>
             </div><!-- /Option list -->
-
-            <!-- Option list error -->
-            <div *ngIf="friesOptions.touched && friesOptions.invalid" class="side-error-container">
-                <div class="error-text" *ngIf="friesOptions.errors.required">A dressing is required</div>
-            </div><!-- /Option list error -->
 
         </form><!-- /Options form -->
 

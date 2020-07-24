@@ -49,17 +49,11 @@
                         #steakOptions="ngModel"
                         id="steakOptions"
                         (change)="optionsChanged()">
-                    <option value="" selected>Choose doneness</option>
                     <option *ngFor="let option of options"
                             [ngValue]="option">{{option.name}}</option>
                 </select><!-- /Options item -->
 
             </div><!-- /Options List -->
-
-            <!-- Options errors -->
-            <div *ngIf="steakOptions.touched && steakOptions.invalid" class="main-error-container">
-                <p *ngIf="steakOptions.errors.required" style="color: red">A doneness is required</p>
-            </div><!-- /Options errors -->
 
         </form><!-- /Options form-->
 
@@ -88,14 +82,14 @@
         <div class="main-sides-list">
             <ul>
                 <!-- Side item -->
-                <div class="main-sides-item">
+                <div class="main-sides-item" [style]="saladStyle">
                     <li >
                         <app-side-item-salad (emitToParent)="receiveFromChild($event)"></app-side-item-salad>
                     </li>
                 </div><!-- /Side item -->
 
                 <!-- Side item -->
-                <div class="main-sides-item">
+                <div class="main-sides-item" [style]="potatoStyle">
                     <li>
                         <app-side-item-baked-potato (emitToParent)="receiveFromChild($event)"></app-side-item-baked-potato>
                     </li>

@@ -78,14 +78,14 @@
         <div class="main-sides-list">
             <ul>
                 <!-- Side item -->
-                <div class="main-sides-item">
+                <div class="main-sides-item" [style]="saladStyle">
                     <li >
                         <app-side-item-salad (emitToParent)="receiveFromChild($event)"></app-side-item-salad>
                     </li>
                 </div><!-- /Side item -->
 
                 <!-- Side item -->
-                <div class="main-sides-item">
+                <div class="main-sides-item" [style]="friesStyle">
                     <li>
                         <app-side-item-fries (emitToParent)="receiveFromChild($event)"></app-side-item-fries>
                     </li>

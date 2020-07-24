@@ -9,7 +9,7 @@ export class MainItemSteakComponent implements OnInit {
 
   name = "Steak";
 
-  desc = "This is a description for steak";
+  desc = "This is a description for steak.";
 
   image = ""; // ../../../assets/images/Steak.jpeg
 
@@ -68,12 +68,16 @@ export class MainItemSteakComponent implements OnInit {
   optionsRequiredTextStyle: string = "color: red";
 
   optionsRequiredText: string = "*Required";
+
+  saladStyle: string = "";
+
+  potatoStyle: string = "";
   
 
   // used to update user options upon input
   optionsChanged() {
     this.optionsComplete = true;
-    this.optionsRequiredText = "Selected";
+    this.optionsRequiredText = "";
     this.optionsRequiredTextStyle = "";
     this.orderButtonToggle();
   }
@@ -82,7 +86,16 @@ export class MainItemSteakComponent implements OnInit {
   receiveFromChild(event) {
     this.sideSelected = event;
     this.sidesComplete = true;
-    this.sidesRequiredText = this.sideSelected.name + " Selected";
+    // change the border around the side that is currently selected
+    if (event.name == "Salad") {
+      this.saladStyle = "border: #ACCEF7 solid 2px";
+      this.potatoStyle = "";
+    }
+    if (event.name == "Baked Potato") {
+      this.potatoStyle = "border: #ACCEF7 solid 2px";
+      this.saladStyle = "";
+    }
+    this.sidesRequiredText = "";
     this.sidesRequiredTextStyle = "";
     this.orderButtonToggle();
   }
@@ -91,6 +104,9 @@ export class MainItemSteakComponent implements OnInit {
   orderButtonToggle() {
     if (this.optionsComplete && this.sidesComplete ) {
       this.orderButton = "Add to order";
+    }
+    else {
+      this.orderButton = "Selections Required";
     }
   }
 
@@ -128,14 +144,12 @@ export class MainItemSteakComponent implements OnInit {
         side: this.sideSelected,
         specialRequests: this.specialRequests
       }
+
+      // options reset
       this.optionsSelected = undefined;
       this.optionsComplete = false;
       this.optionsRequiredTextStyle = "color: red";
       this.optionsRequiredText = "*Required";
-      this.sideSelected = undefined;
-      this.sidesComplete = false;
-      this.sidesRequiredTextStyle = "color: red";
-      this.sidesRequiredText = "*Required";
       this.options = [
         {
           id: 1,
@@ -150,6 +164,20 @@ export class MainItemSteakComponent implements OnInit {
           name: "Well Done"
         }
       ];
+
+      // sides reset
+      this.sideSelected = undefined;
+      this.sidesComplete = false;
+      this.sidesRequiredTextStyle = "color: red";
+      this.sidesRequiredText = "*Required";
+      this.saladStyle = "";
+      this.potatoStyle = "";
+
+      // special requests reset
+      this.specialRequests = undefined;
+
+      // order button reset
+      this.orderButtonToggle();
     }
 
   constructor() { }
